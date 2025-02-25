@@ -4,7 +4,6 @@ import sympy as smp
 import math
 
 
-# math
 def approximate(func, point, n):
     if n == 1:
         return f'{func(point)} * x / x'
@@ -25,16 +24,17 @@ def approximate(func, point, n):
     return smp.Symbol(approximated_func[:-3])
 
 
-plt.rcParams["figure.figsize"] = (10, 7)
+def set_params_and_run():
+    plt.rcParams["figure.figsize"] = (10, 7)
 
-fig, ax = plt.subplots()
-x = np.linspace(-4, 4, 100)
-y = np.exp(x)
+    fig, ax = plt.subplots()
+    x = np.linspace(-4, 4, 100)
+    y = np.cos(x)
 
-ax.grid()
-ax.plot(x, y)
+    ax.grid()
+    ax.plot(x, y)
+    ###
+    approximated = smp.lambdify(smp.Symbol('x', real=True), approximate(smp.cos, 0, 4))
 
-approximated = smp.lambdify(smp.Symbol('x', real=True), approx(smp.exp, 0, 1))
-
-ax.plot(x, approximated(x), "black")
-plt.show()
+    ax.plot(x, approximated(x), "black")
+    plt.show()
