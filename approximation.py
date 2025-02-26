@@ -28,13 +28,13 @@ def set_params_and_run():
     plt.rcParams["figure.figsize"] = (10, 7)
 
     fig, ax = plt.subplots()
-    x = np.linspace(-4, 4, 100)
-    y = np.cos(x)
+    x = np.linspace(0, 10, 100)
+    y = np.exp(x)
 
     ax.grid()
     ax.plot(x, y)
     ###
-    approximated = smp.lambdify(smp.Symbol('x', real=True), approximate(smp.cos, 0, 4))
+    approximated = smp.lambdify(smp.Symbol('x', real=True), approximate(smp.exp, 5, 5))
 
     ax.plot(x, approximated(x), "black")
     plt.show()
