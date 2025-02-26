@@ -2,6 +2,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 import sympy as smp
 import math
+import error_handler
+import visual
 
 
 def approximate(func, point, n):
@@ -24,17 +26,18 @@ def approximate(func, point, n):
     return smp.Symbol(approximated_func[:-3])
 
 
-def set_params_and_run():
-    plt.rcParams["figure.figsize"] = (10, 7)
+def set_params_and_run(y_func, approximate_func):
+    if (not error_handler.unexpected_input_point() or not error_handler.unexpected_input_n()):
+        plt.rcParams["figure.figsize"] = (10, 7)
 
-    fig, ax = plt.subplots()
-    x = np.linspace(0, 10, 100)
-    y = np.exp(x)
+        fig, ax = plt.subplots()
+        x = np.linspace(0, 10, 100)
+        y = y_func(x)
 
-    ax.grid()
-    ax.plot(x, y)
-    ###
-    approximated = smp.lambdify(smp.Symbol('x', real=True), approximate(smp.exp, 5, 5))
+        ax.grid()
+        ax.plot(x, y)
 
-    ax.plot(x, approximated(x), "black")
-    plt.show()
+        approximated = smp.lambdify(smp.Symbol('x', real=True), approximate(approximate_func, 5, 5))
+
+        ax.plot(x, approximated(x), "black")
+        plt.show()
