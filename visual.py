@@ -16,7 +16,7 @@ settings_entry_n_lable = tk.Label(window, text="Enter the ascent:", bg="#CFCFCF"
 appr_btn = tk.Button(window, text="Approximate:", bg="#d2d4d3", activebackground="#d2d4d3")
 
 settings_entry_func: tk.Entry = tk.Entry(window, bg="#d2d4d3", width=20, state='normal')
-settings_entry_point: tk.Entry = tk.Entry(window, bg="#d2d4d3", width=3, state='normal')
+settings_entry_point: tk.Entry = tk.Entry(window, bg="#d2d4d3", width=4, state='normal')
 settings_entry_n: tk.Entry = tk.Entry(window, bg="#d2d4d3", width=3, state='normal')
 
 appr_btn.pack()
