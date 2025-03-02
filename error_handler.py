@@ -1,4 +1,6 @@
 import visual
+import math
+
 
 #
 # def unexpected_input_func():
@@ -6,18 +8,16 @@ import visual
 
 
 def unexpected_input_point():
-    try:
-        if float(visual.settings_entry_point.get()) or float(visual.settings_entry_point.get()) == 0:
-            return False
-    except ValueError:
-        return True
+    splitted_input = visual.settings_entry_point.get().split()
+
+    for char in splitted_input:
+        if not char.isdigit() and char != "pi" and char != "E" and char not in (' ', '*', '+', '/', '(', ')'):
+            return True
+    return False
 
 
 def unexpected_input_n():
-    try:
-        if int(visual.settings_entry_n.get()) or int(visual.settings_entry_n.get()) == 0:
+        if visual.settings_entry_n.get().isdigit() and int(visual.settings_entry_n.get()) > 0:
             return False
-        if int(visual.settings_entry_n.get()) < 0:
+        else:
             return True
-    except ValueError:
-        return True
