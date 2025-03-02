@@ -8,7 +8,7 @@ def unexpected_input_func():
     try:
         test_func = eval("".join(visual.settings_entry_func.get().split()))
         return False
-    except NameError:
+    except (NameError, SyntaxError):
         return True
 
 
