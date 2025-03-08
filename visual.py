@@ -6,17 +6,30 @@ window.title("Function Approximation")
 window.resizable(False, False)
 window.config(bg="#d2d4d3")
 window.iconphoto(False, tk.PhotoImage(file='pics/tk_icon.png'))
-window.minsize(300, 200)
+window.minsize(300, 260)
 
 settings_label = tk.Label(window, text="Settings:", bg="#CFCFCF", relief=tk.RAISED)
 settings_entry_func_lable = tk.Label(window, text="Enter your function:", bg="#CFCFCF", relief=tk.FLAT)
 settings_entry_point_lable = tk.Label(window, text="Enter point:", bg="#CFCFCF", relief=tk.FLAT)
 settings_entry_n_lable = tk.Label(window, text="Enter the ascent:", bg="#CFCFCF", relief=tk.FLAT)
 
+error_function_undefined_at_point = (
+    tk.Label(window, text="Your function is undefined at given point",
+             bg="#d2d4d3", fg="red", relief=tk.FLAT))
+error_function_unexpected_input = (
+    tk.Label(window, text="Your function either doesn't exist \nor you need to use only x as function argument",
+             bg="#d2d4d3", fg="red", relief=tk.FLAT))
+error_point_unexpected_input = (
+    tk.Label(window, text="Only numeric values and math constants are acceptable",
+             bg="#d2d4d3", fg="red", relief=tk.FLAT))
+error_n_unexpected_input = (
+    tk.Label(window, text="Only positive integer values are acceptable",
+             bg="#d2d4d3", fg="red", relief=tk.FLAT))
+
 appr_btn = tk.Button(window, text="Approximate:", bg="#d2d4d3", activebackground="#d2d4d3")
 
 settings_entry_func: tk.Entry = tk.Entry(window, bg="#d2d4d3", width=20, state='normal')
-settings_entry_point: tk.Entry = tk.Entry(window, bg="#d2d4d3", width=4, state='normal')
+settings_entry_point: tk.Entry = tk.Entry(window, bg="#d2d4d3", width=6, state='normal')
 settings_entry_n: tk.Entry = tk.Entry(window, bg="#d2d4d3", width=3, state='normal')
 
 appr_btn.pack()

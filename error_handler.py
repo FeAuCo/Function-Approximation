@@ -6,7 +6,7 @@ def unexpected_input_func():
     x = symbols('x')
 
     try:
-        test_func = eval("".join(visual.settings_entry_func.get().split()))
+        eval("".join(visual.settings_entry_func.get().split()))
 
         if visual.error_function_unexpected_input.winfo_exists():
             visual.error_function_unexpected_input.place_forget()
@@ -25,10 +25,17 @@ def unexpected_input_func():
 
 def unexpected_input_point():
     try:
-        splitted_input = visual.settings_entry_point.get().split()
+        cleared_entry = visual.settings_entry_point.get().replace('*', ' ')
+        cleared_entry.replace('+', ' ')
+        cleared_entry.replace('/', ' ')
+        cleared_entry.replace('(', ' ')
+        cleared_entry.replace(')', ' ')
+
+        splitted_input = cleared_entry.split()
 
         for char in splitted_input:
-            if not char.isdigit() and char != "pi" and char != "E" and char not in (' ', '*', '+', '/', '(', ')'):
+            if (not is_str_float(char)
+                    and char != "pi" and char != "E" and char not in (' ', '*', '+', '/', '(', ')')):
 
                 visual.error_n_unexpected_input.place_forget()
                 visual.error_function_undefined_at_point.place_forget()
@@ -77,8 +84,8 @@ def unexpected_input_n():
 
 def func_is_undefined_at_point():
     try:
-        test_func = (lambdify(symbols('x'), "".join(visual.settings_entry_func.get().split()))
-                     (float(eval(visual.settings_entry_point.get()))))
+        (lambdify(symbols('x'), "".join(visual.settings_entry_func.get().split()))
+         (float(eval(visual.settings_entry_point.get()))))
 
         if visual.error_function_undefined_at_point.winfo_exists():
             visual.error_function_undefined_at_point.place_forget()
@@ -92,3 +99,13 @@ def func_is_undefined_at_point():
         visual.error_function_undefined_at_point.pack()
         visual.error_function_undefined_at_point.place(x=150, y=225, anchor="center")
         return True
+
+
+def is_str_float(numeric_string):
+    try:
+        float(numeric_string)
+
+        return True
+
+    except ValueError:
+        return False
